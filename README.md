@@ -13,13 +13,14 @@ Zenodo Automation is a Python script that connects to the Zenodo API to automate
 
 ## Setup
 
-1. To get started, you'll need download or clone the repository to your local machine.
-2.To run the script successfully, you need to provide a valid Zenodo access token. Follow these steps to do this:
+To get started, you'll need download or clone the repository to your local machine.
+
+To run the script successfully, you need to provide a valid Zenodo access token. Follow these steps to do this:
 - Create a text file called "access_token.txt" and save it in the root directory of the repository.
 - Open the "access_token.txt" file and paste your Zenodo access token into it. Save the file and close it.
 - Open the script called "ZenodoAutomation.py" and provide the correct path to the "access_token.txt" file after the equal sign (=) in the token_file_path variable and use double backslashes (\\) to indicate the path, like this: 'C:\\Users\\mary\\docs\\ZenodoAuto\\access_token.txt'. Remember that this file should contain your personal access token obtained from Zenodo, for this reason, is important to note that this is personal data and you should be careful to prevent accidentally share or expose the file.
 
-3. If the "repositoryData" folder does not exist, the script will create it automatically, all the downloaded files will be stored in this folder.
+If the "repositoryData" folder does not exist, the script will create it automatically, all the downloaded files will be stored in this folder.
 
 ## Usage
 
