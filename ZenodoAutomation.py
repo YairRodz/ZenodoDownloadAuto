@@ -4,8 +4,8 @@ import itertools
 import csv
 
 # Define the path to the file that contains your ACCESS_TOKEN
-# For example 'C:\\Users\\mary\\docs\\ZenodoAuto\\access_token.txt'
-token_file_path = 'C:\\Users\\yairl\\Intership\\ZenodoDownloadAuto\\access_token.txt'
+# The file is expected to be in the same directory as this script
+token_file_path = './access_token.txt'
 
 # Open the file in read mode
 with open(token_file_path, 'r') as token_file:
