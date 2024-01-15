@@ -58,7 +58,7 @@ def search_and_download(author_name=None, community_name=None):
             records_data.append([record['metadata'].get('title', 'N/A'), record['metadata'].get('description', 'N/A'), record['metadata'].get('creators', 'N/A'), record['metadata'].get('upload_type', 'N/A')])
         else:
             print("This record has no files to download.")
-    if records_data and input("Do you want to generate a CSV file with the records data? (y/n): ").lower() == 'y':
+    if records_data:
         csv_path = os.path.join('repositoryData', 'records.csv')
         write_to_csv(csv_path, records_data)
 
