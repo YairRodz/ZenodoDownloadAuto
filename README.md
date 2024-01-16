@@ -17,9 +17,9 @@ To get started, download or clone the repository.
 
 To run the script successfully, provide a valid Zenodo access token. Follow these steps to do this:
 - Create a text file called "access_token.txt" and save it in the root directory of the repository.
-- Follow the instruction on [Zenodo](https://developers.zenodo.org/#quickstart-upload).
-- Open the "access_token.txt" file and paste your Zenodo access token into it. Save the file and close it.
-- Open the script called `ZenodoAutomation.py` and provide the correct path to the "access_token.txt" file after the equal sign (=) in the token_file_path variable and use double backslashes (\\\) to indicate the path, like this: 'C:\\\Users\\\mary\\\docs\\\ZenodoAuto\\\access_token.txt'. Remember that this file should contain your personal access token obtained from Zenodo, for this reason, is important to note that this is personal data and you should be careful to prevent accidentally share or expose the file.
+- Follow the instruction on [Zenodo](https://developers.zenodo.org/#quickstart-upload) to create the token.
+- Open the "access_token.txt" file and paste your Zenodo access token into it, save the file and close it.
+- Open the script called `ZenodoAutomation.py` and make sure that the "access_token.txt" document is located in the same folder where the script is located. Remember that this file should contain your personal access token obtained from Zenodo, for this reason, is important to note that this is personal data and you should be careful to prevent accidentally share or expose the file.
 
 If the "repositoryData" folder does not exist, the script will create it automatically, all the downloaded files will be stored in this folder.
 
