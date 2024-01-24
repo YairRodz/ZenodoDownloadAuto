@@ -4,4 +4,8 @@ ZenodoAutomation.js
 package-lock.json
 package.json
 node_modules/
+.vscode/
 JavascripZenodoTest.js
+resultsSearch
+JavascriptZenodoTest.js
+JavascriptZenodoTest2.js
