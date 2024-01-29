@@ -8,15 +8,6 @@ const unzipper = require('unzipper');
 const tokenFilePath = './access_token.txt';
 const ACCESS_TOKEN = fs.readFileSync(tokenFilePath, 'utf8').trim();
 
-function msToHMS( ms ) {
-    var seconds = ms / 1000;
-    var hours = parseInt( seconds / 3600 );
-    seconds = seconds % 3600;
-    var minutes = parseInt( seconds / 60 );
-    seconds = seconds % 60;
-    return `${hours}h${minutes}m${Math.round(seconds)}s`;
-}
-
 let searchCount = 0;
 let searchId = 0;
 
