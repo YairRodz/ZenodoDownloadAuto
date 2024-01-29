@@ -1,10 +1,10 @@
 # Zenodo Automation
 
-The Zenodo Automation script interfaces with the Zenodo API to automate the process of downloading files associated with two search criteria: author and community. The script is currently being developed in two parallel versions: JavaScript (ZenodoAutomation.js) and Python (ZenodoAutomation.py), please refer to the appropriate section in this Readme for instructions on how to run each version.
+The Zenodo Automation script interfaces with the Zenodo API to automate the process of downloading files associated with two search criteria: author and community. The script is currently being developed in two parallel versions: JavaScript ('ZenodoAutomation.js') and Python ('ZenodoAutomation.py'), please refer to the appropriate section in this Readme for instructions on how to run each version.
 
 ## ZenodoAutomation.js – JavaScript Version
 
-ZenodoAutomation.js is a JavaScript script that interfaces with the Zenodo API to automate the process of downloading files associated with two search criteria: author and community.
+'ZenodoAutomation.js' is a JavaScript script that interfaces with the Zenodo API to automate the process of downloading files associated with two search criteria: author and community.
 
 ## Requirements
 
