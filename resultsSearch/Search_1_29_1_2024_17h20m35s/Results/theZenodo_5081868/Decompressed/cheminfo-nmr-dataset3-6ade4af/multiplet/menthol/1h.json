@@ -1,0 +1,18 @@
+{
+  "spectra": [
+    {
+      "data": {},
+      "id": "0abwvynpah97",
+      "source": {
+        "original": [],
+        "jcamp": null,
+        "jcampURL": "./menthol/1h.jdx"
+      },
+      "display": {
+        "name": "menthol",
+        "color": "#C10020"
+      }
+    }
+  ],
+  "molecules": []
+}

@@ -1,10 +1,7 @@
 access_token.txt
-repositoryData/
-ZenodoAutomation.js
 package-lock.json
 package.json
 node_modules/
 .vscode/
-JavascripZenodoTest.js
-resultsSearch
-JavascriptZenodoTest2.js
+Content/
+Descompressed/
