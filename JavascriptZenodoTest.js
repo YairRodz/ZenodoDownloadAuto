@@ -8,6 +8,19 @@ const unzipper = require('unzipper');
 const tokenFilePath = './access_token.txt';
 const ACCESS_TOKEN = fs.readFileSync(tokenFilePath, 'utf8').trim();
 
+function msToHMS( ms ) {
+    // 1- Convert to seconds:
+    var seconds = ms / 1000;
+    // 2- Extract hours:
+    var hours = parseInt( seconds / 3600 ); // 3,600 seconds in 1 hour
+    seconds = seconds % 3600; // seconds remaining after extracting hours
+    // 3- Extract minutes:
+    var minutes = parseInt( seconds / 60 ); // 60 seconds in 1 minute
+    // 4- Keep only seconds not extracted to minutes:
+    seconds = seconds % 60;
+    return `${hours}h${minutes}m${Math.round(seconds)}s`;
+}
+
 let searchCount = 0;
 let searchId = 0;
 
@@ -91,7 +104,9 @@ const searchAndDownload = async (authorName = null, communityName = null, userNa
     const searchFolder = `Search_${searchCount}_${searchDate.getDate()}_${searchDate.getMonth()+1}_${searchDate.getFullYear()}_${searchDate.getHours()}h${searchDate.getMinutes()}m${searchDate.getSeconds()}s`;
     const searchPath = path.join('resultsSearch', searchFolder);
     fs.mkdirSync(searchPath, { recursive: true });
+    const searchStartTimeMS = searchDate.getTime();
     const searchStartTime = searchDate.getTime();
+    
 
     let query = '';
     if (authorName) {
@@ -169,13 +184,13 @@ const searchAndDownload = async (authorName = null, communityName = null, userNa
     }
     
     const searchEndDate = new Date();
-    const searchEndTime = searchEndDate.getTime();
+    const searchEndTime = msToHMS(searchEndDate.getTime() - searchStartTimeMS);
 
     const searchInfo = {
         searchId,
         authorName,
         communityName,
-        searchStartTime,
+        searchStartTime: msToHMS(searchStartTime),
         searchEndTime,
         userName,
         searchDate: searchDate.toISOString().split('T')[0],
