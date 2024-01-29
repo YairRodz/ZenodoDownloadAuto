@@ -46,7 +46,7 @@ node ZenodoAutomation.js
 
 4. If there are files linked to the entered search criteria, they will be downloaded to the "resultsSearch" folder inside the folders called “Content” the Zip files will be automatically decompressed into the folder named "Decompressed".
 
-5. Finally, the script will automatically generate a JSON log of the downloaded files. This log will include details associated with the downloaded files.
+5. Finally, the script will automatically generate a JSON log of the downloaded files, this log will save information about each search in a JSON file in the "resultsSearch" directory, the name of each JSON file includes the author's name, the community name, the start and end time of the search (in milliseconds), the user name, and the date of the search. The information saved in each JSON file includes the start and end time of the search in both milliseconds and standard time format, as well as the search criteria used.
 
 Please note that this script has been tested on Windows operating systems. For other operating systems, you may need to modify the script to handle differences in path syntax.
 
