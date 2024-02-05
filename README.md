@@ -18,6 +18,10 @@ You can install the necessary Node.js packages using npm:
 
 ```bash
 npm install axios fs path
+npm install axios
+npm install csv-writer
+npm install unzipper
+
 ```
 
 ## Setup
@@ -37,7 +41,7 @@ If the "resultsSearch" folder does not exist, the script will create it automati
 1. Run the script:
 
 ```bash
-node ZenodoAutomation.js
+node ZenodoAutomationJavascript.js
 ```
 
 2. Enter the user name.
