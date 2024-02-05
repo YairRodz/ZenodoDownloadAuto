@@ -99,7 +99,8 @@ If the "repositoryData" folder does not exist, the script will create it automat
 1. Run the script:
    
 ```
-python ZenodoAutomation.py
+python ZenodoAutomationPython.py
+python3 ZenodoAutomationPython.py
 ```
 
 3. Enter the desired search term.
@@ -108,6 +109,6 @@ python ZenodoAutomation.py
 
 5. If there are files linked to the entered search criteria, they will be downloaded to the "repositoryData" folder.
 
-6. Finally, the script will automatically generate a CSV log of the downloaded files, this log will include details associated with the downloaded files.
+6. Finally, the script will automatically generate a CSV log of the downloaded files in the /`./repositoryData folder` , this log will include details associated with the downloaded files.
 
 Please note that this script has only been tested on Windows operating systems. For other operating systems, you may need to modify the script to handle differences in path syntax.
