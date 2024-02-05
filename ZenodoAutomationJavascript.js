@@ -151,8 +151,8 @@ const searchAndDownload = async (authorName = null, communityName = null, userNa
 
         recordsData.push(metadata);
 
-    fs.writeFileSync(path.join(metadataPath, 'metadata.json'), JSON.stringify(metadata));
-    
+    fs.writeFileSync(path.join(metadataPath, 'metadata.json'), JSON.stringify(metadata, null, 2));
+ 
     if (record.files && record.files.length > 0) {
         const downloadUrl = record.files[0].links.self;
         const title = record.metadata.title || 'N/A';
