@@ -21,7 +21,7 @@ npm install axios fs path
 npm install axios
 npm install csv-writer
 npm install unzipper
-
+npm install yargs
 ```
 
 ## Setup
@@ -42,6 +42,9 @@ If the "resultsSearch" folder does not exist, the script will create it automati
 
 ```bash
 node ZenodoAutomationJavascript.js
+node ZenodoAutomationJavascript.js
+node ZenodoAutomationJavascript.js --authorName "Author's Name" --communityName "Community Name" --userName "Your Name"
+node ZenodoAutomationJavascript.js --authorName "Damien Jeannerat" --userName "DamienJeanneratAsUserName"
 ```
 
 2. Enter the user name.
@@ -105,6 +108,11 @@ If the "repositoryData" folder does not exist, the script will create it automat
 ```
 python ZenodoAutomationPython.py
 python3 ZenodoAutomationPython.py
+python3 ZenodoAutomationPython.py --author "Author Name" 
+python3 ZenodoAutomationPython.py --community "Community Name"
+python3 ZenodoAutomationPython.py --author "Author Name" --community "Community Name"
+python3 ZenodoAutomationPython.py --author "Damien Jeannerat" 
+
 ```
 
 3. Enter the desired search term.

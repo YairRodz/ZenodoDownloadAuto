@@ -4,12 +4,17 @@ const path = require('path');
 const readline = require('readline');
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const unzipper = require('unzipper');
+const yargs = require('yargs/yargs');
+const { hideBin } = require('yargs/helpers');
+
+const argv = yargs(hideBin(process.argv)).options({
+    authorName: { type: 'string', demandOption: false, alias: 'a' },
+    communityName: { type: 'string', demandOption: false, alias: 'c' },
+    userName: { type: 'string', demandOption: false, alias: 'u' }
+}).argv;
 
 const tokenFilePath = './access_token.txt';
 const ACCESS_TOKEN = fs.readFileSync(tokenFilePath, 'utf8').trim();
-
-let searchCount = 0;
-let searchId = 0;
 
 const downloadFile = async (downloadUrl, savePath) => {
     const writer = fs.createWriteStream(savePath);
@@ -194,8 +199,7 @@ const searchAndDownload = async (authorName = null, communityName = null, userNa
     if (recordsData.length > 0) {
         const csvPath = path.join(searchPath, 'records.csv');
         await writeToFile(csvPath, recordsData);
-    }
-};
+    }};
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -207,15 +211,27 @@ const askQuestion = (query) => {
 };
 
 const main = async () => {
-    const userName = await askQuestion("Enter your name: ");
-    while (true) {
-        const authorName = await askQuestion("Enter the name of the author (or press Enter to quit): ");
-        if (!authorName) {
-            rl.close();
-            break;
+    let userName = argv.userName;
+    if (!userName) {
+        userName = await askQuestion("Enter your name: ");
+    }
+
+    let authorName = argv.authorName;
+    let communityName = argv.communityName;
+
+    if (!authorName) {
+        while (true) {
+            authorName = await askQuestion("Enter the name of the author (or press Enter to quit): ");
+            if (!authorName) {
+                rl.close();
+                break;
+            }
+            communityName = await askQuestion("Enter the name of the community (or press Enter to skip): ");
+            await searchAndDownload(authorName, communityName, userName);
         }
-        const communityName = await askQuestion("Enter the name of the community (or press Enter to skip): ");
-        await searchAndDownload(authorName || null, communityName || null, userName);
+    } else {
+        await searchAndDownload(authorName, communityName || null, userName);
+        process.exit(); // Exit after completing the search
     }
 };
 
