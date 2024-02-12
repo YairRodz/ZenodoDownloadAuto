@@ -124,3 +124,7 @@ python3 ZenodoAutomationPython.py --author "Damien Jeannerat"
 6. Finally, the script will automatically generate a CSV log of the downloaded files in the /`./repositoryData folder` , this log will include details associated with the downloaded files.
 
 Please note that this script has only been tested on Windows operating systems. For other operating systems, you may need to modify the script to handle differences in path syntax.
+
+## Related links
+
+[Demo downloading a remote zip file](html/demoListFilesFromZip.html)
