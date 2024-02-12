@@ -7,6 +7,10 @@ const unzipper = require('unzipper');
 const yargs = require('yargs/yargs');
 const { hideBin } = require('yargs/helpers');
 
+// Declare and initialize global variables at the top of the script
+let searchCount = 0;
+let searchId = 0;
+
 const argv = yargs(hideBin(process.argv)).options({
     authorName: { type: 'string', demandOption: false, alias: 'a' },
     communityName: { type: 'string', demandOption: false, alias: 'c' },
