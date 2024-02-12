@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download and List ZIP Contents</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+</head>
+<body>
+
+<button id="downloadBtn">Download ZIP</button>
+<table id="fileList">
+    <tr>
+        <th>File Name</th>
+    </tr>
+</table>
+
+<script>
+document.getElementById('downloadBtn').addEventListener('click', function() {
+    fetch('https://zenodo.org/records/1146869/files/sample1.zip')
+    .then(response => response.blob())
+    .then(blob => {
+        JSZip.loadAsync(blob).then(zip => {
+            // Clear existing contents
+            document.getElementById('fileList').innerHTML = '<tr><th>File Name</th></tr>';
+
+            zip.forEach((relativePath, file) => {
+                // Append each file name to the table
+                let row = document.createElement('tr');
+                let cell = document.createElement('td');
+                cell.textContent = relativePath;
+                row.appendChild(cell);
+                document.getElementById('fileList').appendChild(row);
+            });
+        });
+    });
+});
+</script>
+
+</body>
+</html>

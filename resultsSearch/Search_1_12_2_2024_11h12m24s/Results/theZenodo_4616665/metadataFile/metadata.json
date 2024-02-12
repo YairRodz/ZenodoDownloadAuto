@@ -1,0 +1,21 @@
+{
+  "publication_date": "2021-03-18",
+  "title": "NMR spectra",
+  "creators": [
+    {
+      "name": "Damien Jeannerat",
+      "affiliation": "NMRprocess.ch",
+      "orcid": "0000-0001-7018-4288"
+    }
+  ],
+  "description": "<p>NMR spectra of paper</p>\n\n<p>Application of multiplet structure deconvolution to extract scalar coupling constants from 1D NMR spectra</p>\n\n<p>Damien Jeannerat and Carlos Cobas</p>",
+  "access_right": "open",
+  "license": {
+    "id": "cc-by-4.0"
+  },
+  "doi": "10.5281/zenodo.4616665",
+  "keywords": [
+    "nmr",
+    "jcamp"
+  ]
+}
