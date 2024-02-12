@@ -22,7 +22,7 @@
 
 <table id="fileList">
     <tr>
-        <th>File Name</th>
+        <th>File Name (click on images allows to download them)</th>
     </tr>
 </table>
 <script>
@@ -43,7 +43,7 @@ document.getElementById('downloadBtn').addEventListener('click', function() {
     .then(blob => {
         JSZip.loadAsync(blob).then(zip => {
             document.getElementById('status').textContent = 'Listing contents...';
-            document.getElementById('fileList').innerHTML = '<tr><th>File Name</th><th>Preview</th></tr>'; // Add a Preview column
+            document.getElementById('fileList').innerHTML = '<tr><th>File Name</th><th>Preview & Download</th></tr>'; // Update header for clarity
 
             zip.forEach((relativePath, zipEntry) => {
                 let row = document.createElement('tr');
@@ -57,12 +57,20 @@ document.getElementById('downloadBtn').addEventListener('click', function() {
                     zipEntry.async("blob").then(function(blob) {
                         let imgUrl = URL.createObjectURL(blob);
 
-                        // Create an image element to display the PNG
-                        let imgCell = document.createElement('td');
+                        // Create a link and image element to display and download the PNG
+                        let downloadLink = document.createElement('a');
+                        downloadLink.href = imgUrl;
+                        downloadLink.download = relativePath; // Suggests the name for the downloaded file
+                        
                         let img = document.createElement('img');
                         img.src = imgUrl;
                         img.style.width = '100px'; // Set a fixed width for the image, adjust as needed
-                        imgCell.appendChild(img);
+                        img.style.cursor = 'pointer'; // Change cursor to indicate the image is clickable
+
+                        // Append the image to the link, then the link to the cell
+                        downloadLink.appendChild(img);
+                        let imgCell = document.createElement('td');
+                        imgCell.appendChild(downloadLink);
                         row.appendChild(imgCell);
                     });
                 } else {

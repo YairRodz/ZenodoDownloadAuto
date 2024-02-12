@@ -128,4 +128,7 @@ Please note that this script has only been tested on Windows operating systems. 
 ## Related links
 
 [Demo downloading a remote zip file](html/demoListFilesFromZip.html)
-[Demo downloading a remote zip file and shows .png files](html/demoListFilesAndShowsPNG.html)
+
+[Demo downloading a remote zip file and shows and download on click on .png files](html/demoListFilesAndShowsPNG.html)
+
+[Demo downloading a remote zip file and shows and enlarge on click on .png files](html/demoZoomImages.html)

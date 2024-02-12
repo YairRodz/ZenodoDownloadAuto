@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download and Preview ZIP Contents</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+    <style>
+        /* Style the modal */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+        }
+
+        /* Modal Content (image) */
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+
+        /* Caption of Modal Image */
+        #caption {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
+            color: #ccc;
+            padding: 10px 0;
+            height: 150px;
+        }
+
+        /* The Close Button */
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Add Animation */
+        .modal-content, #caption {  
+            -webkit-animation-name: zoom;
+            -webkit-animation-duration: 0.6s;
+            animation-name: zoom;
+            animation-duration: 0.6s;
+        }
+
+        @-webkit-keyframes zoom {
+            from {-webkit-transform:scale(0)} 
+            to {-webkit-transform:scale(1)}
+        }
+
+        @keyframes zoom {
+            from {transform:scale(0)} 
+            to {transform:scale(1)}
+        }
+    </style>
+</head>
+<body>
+
+
+
+
+<h2>List the content of a remote ZIP file with a CORS Proxy</h2>
+
+<p><strong>One way to bypass this limitation is to use a CORS proxy</strong> that adds the necessary CORS headers to the response. You can either use a public CORS proxy (not recommended for production due to security and reliability concerns) or set up your own. To use a public CORS proxy, prepend the proxy URL to your request:</p>
+
+<p><em>Remember that CORS is a security feature of web browsers, designed to protect users from potentially malicious websites. Any method used to bypass CORS should be carefully considered for its security implications.</em></p>
+
+<button id="downloadBtn">Download ZIP (and wait a few seconds)...</button>
+
+<p id="status">Ready to download...</p>
+
+<p><strong>Note: </strong>you have to allow cors-anywhere.herokuapp to use CORS through <a href="https://cors-anywhere.herokuapp.com/corsdemo" target="_blank">https://cors-anywhere.herokuapp.com/corsdemo</a></p>
+
+<table id="fileList">
+    <tr>
+        <th>File Name (click on images allows to Zoom into them)</th>
+    </tr>
+</table>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modalImage">
+    <div id="caption"></div>
+</div>
+
+<script>
+document.getElementById('downloadBtn').addEventListener('click', function() {
+    document.getElementById('status').textContent = 'Searching for the ZIP file...';
+
+    let corsProxy = 'https://cors-anywhere.herokuapp.com/';
+    let targetUrl = 'https://zenodo.org/records/1146869/files/sample1.zip';
+
+    fetch(corsProxy + targetUrl)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        document.getElementById('status').textContent = 'Opening the ZIP file...';
+        return response.blob();
+    })
+    .then(blob => {
+        JSZip.loadAsync(blob).then(zip => {
+            document.getElementById('status').textContent = 'Listing contents...';
+            document.getElementById('fileList').innerHTML = '<tr><th>File Name</th><th>Preview</th></tr>';
+
+            zip.forEach((relativePath, zipEntry) => {
+                let row = document.createElement('tr');
+                let cell = document.createElement('td');
+                cell.textContent = relativePath;
+                row.appendChild(cell);
+
+                if(relativePath.endsWith('.png')) {
+                    zipEntry.async("blob").then(function(blob) {
+                        let imgUrl = URL.createObjectURL(blob);
+                        let imgCell = document.createElement('td');
+                        let img = document.createElement('img');
+                        img.src = imgUrl;
+                        img.style.width = '100px';
+                        img.style.cursor = 'pointer';
+                        img.onclick = function() {
+                            document.getElementById('modalImage').src = this.src;
+                            document.getElementById('caption').textContent = relativePath;
+                            document.getElementById('myModal').style.display = "block";
+                        };
+                        imgCell.appendChild(img);
+                        row.appendChild(imgCell);
+                    });
+                } else {
+                    let emptyCell = document.createElement('td');
+                    row.appendChild(emptyCell);
+                }
+
+                document.getElementById('fileList').appendChild(row);
+            });
+
+            document.getElementById('status').textContent = 'Done!';
+        });
+    })
+    .catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+        document.getElementById('status').textContent = 'Failed to load ZIP file.';
+    });
+});
+
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+</script>
+
+</body>
+</html>
