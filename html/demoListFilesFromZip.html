@@ -16,8 +16,10 @@
 
 <button id="downloadBtn">Download ZIP (and wait a few seconds)...</button>
 
-<p><strong>Note: </strong>that you have to allow cors-anywhere.herokuapp to use CORS through https://cors-anywhere.herokuapp.com/corsdemo
-</p>
+<p id="status">Ready to download...</p>
+
+<p><strong>Note: </strong>you have to allow cors-anywhere.herokuapp to use CORS through <a href="https://cors-anywhere.herokuapp.com/corsdemo" target="_blank">https://cors-anywhere.herokuapp.com/corsdemo</a></p>
+
 <table id="fileList">
     <tr>
         <th>File Name</th>
@@ -26,6 +28,9 @@
 
 <script>
 document.getElementById('downloadBtn').addEventListener('click', function() {
+    // Update status
+    document.getElementById('status').textContent = 'Searching for the ZIP file...';
+
     // Using a CORS proxy to bypass CORS policy
     let corsProxy = 'https://cors-anywhere.herokuapp.com/';
     let targetUrl = 'https://zenodo.org/records/1146869/files/sample1.zip';
@@ -35,10 +40,12 @@ document.getElementById('downloadBtn').addEventListener('click', function() {
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
+        document.getElementById('status').textContent = 'Opening the ZIP file...';
         return response.blob();
     })
     .then(blob => {
         JSZip.loadAsync(blob).then(zip => {
+            document.getElementById('status').textContent = 'Listing contents...';
             // Clear existing contents
             document.getElementById('fileList').innerHTML = '<tr><th>File Name</th></tr>';
 
@@ -50,10 +57,13 @@ document.getElementById('downloadBtn').addEventListener('click', function() {
                 row.appendChild(cell);
                 document.getElementById('fileList').appendChild(row);
             });
+
+            documddent.getElementById('status').textContent = 'Done!';
         });
     })
     .catch(error => {
         console.error('There has been a problem with your fetch operation:', error);
+        document.getElementById('status').textContent = 'Failed to load ZIP file.';
     });
 });
 </script>
