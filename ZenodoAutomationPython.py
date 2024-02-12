@@ -2,6 +2,7 @@ import os
 import requests
 import itertools
 import csv
+import argparse  # Import argparse module
 
 # Define the path to the file that contains your ACCESS_TOKEN
 # The file is expected to be in the same directory as this script
@@ -63,9 +64,21 @@ def search_and_download(author_name=None, community_name=None):
         write_to_csv(csv_path, records_data)
 
 if __name__ == "__main__":
-    while True:
-        author_name = input("Enter the name of the author (or press Enter to quit): ")
-        if not author_name:
-            break
-        community_name = input("Enter the name of the community (or press Enter to skip): ")
-        search_and_download(author_name or None, community_name or None)
+    # Set up the argument parser
+    parser = argparse.ArgumentParser(description="Search and download from Zenodo.")
+    parser.add_argument('--author', '-a', type=str, help="Name of the author")
+    parser.add_argument('--community', '-c', type=str, help="Name of the community")
+
+    # Parse arguments
+    args = parser.parse_args()
+
+    # If arguments are provided, use them; otherwise, ask for input
+    if args.author or args.community:
+        search_and_download(args.author, args.community)
+    else:
+        while True:
+            author_name = input("Enter the name of the author (or press Enter to quit): ")
+            if not author_name:
+                break
+            community_name = input("Enter the name of the community (or press Enter to skip): ")
+            search_and_download(author_name or None, community_name or None)
