@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download and Process ZIP Contents</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.2/FileSaver.min.js"></script>
+</head>
+<body>
+
+<h2>List the content of a remote ZIP file and process specific files and folders</h2>
+<button id="downloadBtn">Download ZIP (and wait a few seconds)...</button>
+<p id="status">Ready to download...</p>
+
+<table id="fileList">
+    <tr>
+        <th>File Name</th>
+        <th>Action</th>
+    </tr>
+</table>
+
+<script>
+document.getElementById('downloadBtn').addEventListener('click', function() {
+    document.getElementById('status').textContent = 'Searching for the ZIP file...';
+
+    const corsProxy = 'https://cors-anywhere.herokuapp.com/';
+    const targetUrl = 'https://zenodo.org/records/1146869/files/sample1.zip';
+
+    fetch(corsProxy + targetUrl)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        document.getElementById('status').textContent = 'Opening the ZIP file...';
+        return response.blob();
+    })
+    .then(blob => {
+        JSZip.loadAsync(blob).then(processZipContents);
+    })
+    .catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+        document.getElementById('status').textContent = 'Failed to load ZIP file.';
+    });
+});
+
+function processZipContents(originalZip) {
+    document.getElementById('status').textContent = 'Listing contents...';
+    document.getElementById('fileList').innerHTML = '<tr><th>File Name</th><th>Action</th></tr>';
+
+    let folderActions = {};
+
+    originalZip.forEach((relativePath, zipEntry) => {
+        let row = document.createElement('tr');
+        let cell = document.createElement('td');
+        cell.textContent = relativePath;
+        row.appendChild(cell);
+
+        let actionCell = document.createElement('td');
+        row.appendChild(actionCell);
+        document.getElementById('fileList').appendChild(row);
+
+        // Match specific file patterns or folders
+        if(/\/(1r|2rr|3rrr)$/.test(relativePath) || /\/(fid|ser)$/.test(relativePath)) {
+            createActionForFileOrFolder(relativePath, actionCell, originalZip, folderActions);
+        }
+    });
+
+    // Process folders after files to ensure button placement logic is correct
+    processFolderActions(folderActions, originalZip);
+    document.getElementById('status').textContent = 'Done listing. Click actions for processing.';
+}
+
+function createActionForFileOrFolder(relativePath, actionCell, originalZip, folderActions) {
+    if (/\/(1r|2rr|3rrr)$/.test(relativePath)) {
+        let button = document.createElement('button');
+        button.textContent = 'Process File';
+        button.onclick = async function() {
+            this.textContent = 'Generating zip file...';
+            await createZipFromPath(originalZip, relativePath, false);
+            this.textContent = 'Process File'; // Reset button text if needed
+        };
+        actionCell.appendChild(button);
+    } else if (/\/(fid|ser)$/.test(relativePath)) {
+        let parts = relativePath.split('/');
+        let folderPath = parts.slice(0, -2).join('/');
+        folderActions[folderPath] = true;
+    }
+}
+
+function processFolderActions(folderActions, originalZip) {
+    for (let folderPath in folderActions) {
+        let row = document.createElement('tr');
+        let cell = document.createElement('td');
+        cell.textContent = folderPath + " (Folder)";
+        row.appendChild(cell);
+
+        let actionCell = document.createElement('td');
+        let button = document.createElement('button');
+        button.textContent = 'Process Folder';
+        button.onclick = async function() {
+            this.textContent = 'Generating zip file...';
+            await createZipFromPath(originalZip, folderPath, true);
+            this.textContent = 'Process Folder'; // Reset button text if needed
+        };
+        actionCell.appendChild(button);
+        row.appendChild(actionCell);
+
+        document.getElementById('fileList').appendChild(row);
+    }
+}
+
+async function createZipFromPath(originalZip, triggerPath, isFolder, button) {
+    let targetPath = isFolder ? triggerPath : triggerPath.split('/').slice(0, -1).join('/');
+    let newZip = new JSZip();
+    let promises = [];
+
+    originalZip.forEach((relativePath, zipEntry) => {
+        if (isFolder ? relativePath.startsWith(triggerPath) : relativePath.startsWith(targetPath)) {
+            let promise = zipEntry.async("blob").then(blob => {
+                let newPath = isFolder ? relativePath : relativePath.substring(targetPath.length);
+                newZip.file(newPath, blob, {binary: true});
+            });
+            promises.push(promise);
+        }
+    });
+
+    await Promise.all(promises);
+    newZip.generateAsync({type:"blob"}).then(content => {
+        let parts = triggerPath.split('/');
+        // Skip the 'pdata' level for naming, directly use experiment number and main folder name
+        let experimentNumberIndex = parts.length - 4; // Adjust index skipping 'pdata' level
+        let mainFolderName = parts.slice(0, experimentNumberIndex).join('_');
+        let experimentNumber = parts[experimentNumberIndex];
+        
+        // Construct the file name, excluding 'pdata' and similar levels
+        let downloadName = `${mainFolderName}_${experimentNumber}.zip`;
+
+        // Update button text to show the download name
+        button.textContent = `Download ${downloadName}`;
+
+        saveAs(content, downloadName);
+    });
+}
+function createActionForFileOrFolder(relativePath, actionCell, originalZip) {
+    let button = document.createElement('button');
+    // Determine if it's a special file or folder containing 'ser' or 'fid'
+    if (/\/(1r|2rr|3rrr)$/.test(relativePath)) {
+        let downloadName = constructDownloadName(relativePath, false);
+        button.textContent = `Download ${downloadName}`;
+        button.onclick = async function() {
+            this.textContent = 'Preparing Download...';
+            await createZipFromPath(originalZip, relativePath, "file", this, downloadName);
+            this.textContent = `Save ${downloadName}`;
+        };
+    } else if (/\/(ser|fid)$/.test(relativePath)) {
+        let folderPath = relativePath.split('/').slice(0, -1).join('/'); // Get the folder path
+        let downloadName = constructDownloadName(folderPath, true);
+        // Check if the button for this folder has been created
+        if (!actionCell.hasChildNodes()) {
+            button.textContent = `Download ${downloadName}`;
+            button.onclick = async function() {
+                this.textContent = 'Preparing Download...';
+                await createZipFromPath(originalZip, folderPath, "folder", this, downloadName);
+                this.textContent = `Save ${downloadName}`;
+            };
+            actionCell.appendChild(button);
+        }
+        return; // Skip further processing to avoid duplicate buttons
+    } else {
+        // No action needed for this path
+        return;
+    }
+    actionCell.appendChild(button);
+}
+
+function constructDownloadName(path, isFolder) {
+    let parts = path.split('/');
+    if (isFolder || /\/(1r|2rr|3rrr)$/.test(path)) {
+        // For special files or folders, construct name based on three steps below
+        let mainFolderName = parts.slice(0, -3).join('_');
+        let downloadName = `${mainFolderName}.zip`;
+        return downloadName;
+    }
+    // Default to a generic name if none of the conditions match
+    return "download.zip";
+}
+
+async function createZipFromPath(originalZip, triggerPath, type, button, downloadName) {
+    let targetPath = triggerPath;
+    if (type === "file") {
+        // Adjust targetPath to include all files from the folder three steps below
+        targetPath = triggerPath.split('/').slice(0, -3).join('/');
+    }
+    let newZip = new JSZip();
+    let promises = [];
+
+    originalZip.forEach((relativePath, zipEntry) => {
+        if (relativePath.startsWith(targetPath) && !zipEntry.dir) {
+            let promise = zipEntry.async("blob").then(blob => {
+                // Adjust newPath based on whether it's a file or folder operation
+                let newPath = type === "folder" ? relativePath.substring(targetPath.length) : relativePath;
+                newZip.file(newPath, blob, {binary: true});
+            });
+            promises.push(promise);
+        }
+    });
+
+    await Promise.all(promises);
+    button.textContent = 'Preparing...';
+    newZip.generateAsync({type:"blob"}).then(content => {
+        button.textContent = `Save ${downloadName}`;
+        saveAs(content, downloadName);
+        setTimeout(() => button.textContent = `Download ${downloadName}`, 3000); // Reset text
+    });
+
+
+}
+
+let foldersWithSpecialFiles = {}; // Object to track folders
+
+document.getElementById('downloadBtn').addEventListener('click', function() {
+    // Existing code to load and process ZIP file
+    JSZip.loadAsync(blob).then(originalZip => {
+        originalZip.forEach((relativePath, zipEntry) => {
+            // Check if the path ends with 'ser' or 'fid'
+            if (relativePath.match(/\/([^\/]+)\/(ser|fid)$/)) {
+                // Extract the folder name
+                let folderName = RegExp.$1;
+                foldersWithSpecialFiles[folderName] = true;
+            }
+        });
+
+        // After identifying, add buttons for these folders
+        for (let folderName in foldersWithSpecialFiles) {
+            addDownloadButtonForFolder(folderName, originalZip);
+        }
+    });
+});
+
+function addDownloadButtonForFolder(folderName, originalZip) {
+    let fileList = document.getElementById('fileList');
+    let row = document.createElement('tr');
+    let cell = document.createElement('td');
+    cell.textContent = folderName;
+    row.appendChild(cell);
+
+    let actionCell = document.createElement('td');
+    let button = document.createElement('button');
+    button.textContent = `Download ${folderName}`;
+    button.onclick = async function() {
+        this.textContent = 'Preparing Download...';
+        await createZipFromFolder(originalZip, folderName, this);
+        this.textContent = `Download ${folderName}`;
+    };
+    actionCell.appendChild(button);
+    row.appendChild(actionCell);
+
+    fileList.appendChild(row);
+}
+
+async function createZipFromFolder(originalZip, folderName, button) {
+    let newZip = new JSZip();
+    let promises = [];
+
+    originalZip.forEach((relativePath, zipEntry) => {
+        // Check if the path includes the folder
+        if (relativePath.indexOf(`/${folderName}/`) >= 0 && !zipEntry.dir) {
+            let promise = zipEntry.async("blob").then(blob => {
+                // Extract the relative path within the folder
+                let pathWithinFolder = relativePath.split(`/${folderName}/`)[1];
+                newZip.file(pathWithinFolder, blob, {binary: true});
+            });
+            promises.push(promise);
+        }
+    });
+
+    await Promise.all(promises);
+    newZip.generateAsync({type:"blob"}).then(content => {
+        saveAs(content, `${folderName}.zip`);
+        setTimeout(() => button.textContent = `Download ${folderName}`, 3000); // Optional: Reset text
+    });
+}
+
+
+</script>
+
+</body>
+</html>
