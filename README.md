@@ -132,3 +132,5 @@ Please note that this script has only been tested on Windows operating systems. 
 [Demo downloading a remote zip file and shows and download on click on .png files](html/demoListFilesAndShowsPNG.html)
 
 [Demo downloading a remote zip file and shows and enlarge on click on .png files](html/demoZoomImages.html)
+
+[Demo downloading a remote zip file and allows to dowload zip files with Bruker spectra](html/zipBrukerDataFromRepository.html)
