@@ -128,3 +128,4 @@ Please note that this script has only been tested on Windows operating systems. 
 ## Related links
 
 [Demo downloading a remote zip file](html/demoListFilesFromZip.html)
+[Demo downloading a remote zip file and shows .png files](html/demoListFilesAndShowsPNG.html)

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download and List ZIP Contents</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+</head>
+<body>
+
+<h2>List the content of a remote ZIP file with a CORS Proxy</h2>
+
+<p><strong>One way to bypass this limitation is to use a CORS proxy</strong> that adds the necessary CORS headers to the response. You can either use a public CORS proxy (not recommended for production due to security and reliability concerns) or set up your own. To use a public CORS proxy, prepend the proxy URL to your request:</p>
+
+<p><em>Remember that CORS is a security feature of web browsers, designed to protect users from potentially malicious websites. Any method used to bypass CORS should be carefully considered for its security implications.</em></p>
+
+<button id="downloadBtn">Download ZIP (and wait a few seconds)...</button>
+
+<p id="status">Ready to download...</p>
+
+<p><strong>Note: </strong>you have to allow cors-anywhere.herokuapp to use CORS through <a href="https://cors-anywhere.herokuapp.com/corsdemo" target="_blank">https://cors-anywhere.herokuapp.com/corsdemo</a></p>
+
+<table id="fileList">
+    <tr>
+        <th>File Name</th>
+    </tr>
+</table>
+<script>
+document.getElementById('downloadBtn').addEventListener('click', function() {
+    document.getElementById('status').textContent = 'Searching for the ZIP file...';
+
+    let corsProxy = 'https://cors-anywhere.herokuapp.com/';
+    let targetUrl = 'https://zenodo.org/records/1146869/files/sample1.zip';
+
+    fetch(corsProxy + targetUrl)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        document.getElementById('status').textContent = 'Opening the ZIP file...';
+        return response.blob();
+    })
+    .then(blob => {
+        JSZip.loadAsync(blob).then(zip => {
+            document.getElementById('status').textContent = 'Listing contents...';
+            document.getElementById('fileList').innerHTML = '<tr><th>File Name</th><th>Preview</th></tr>'; // Add a Preview column
+
+            zip.forEach((relativePath, zipEntry) => {
+                let row = document.createElement('tr');
+                let cell = document.createElement('td');
+                cell.textContent = relativePath;
+                row.appendChild(cell);
+
+                // Check if the file is a PNG image
+                if(relativePath.endsWith('.png')) {
+                    // Extract the image file
+                    zipEntry.async("blob").then(function(blob) {
+                        let imgUrl = URL.createObjectURL(blob);
+
+                        // Create an image element to display the PNG
+                        let imgCell = document.createElement('td');
+                        let img = document.createElement('img');
+                        img.src = imgUrl;
+                        img.style.width = '100px'; // Set a fixed width for the image, adjust as needed
+                        imgCell.appendChild(img);
+                        row.appendChild(imgCell);
+                    });
+                } else {
+                    // For non-PNG files, just add an empty cell
+                    let emptyCell = document.createElement('td');
+                    row.appendChild(emptyCell);
+                }
+
+                document.getElementById('fileList').appendChild(row);
+            });
+
+            document.getElementById('status').textContent = 'Done!';
+        });
+    })
+    .catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+        document.getElementById('status').textContent = 'Failed to load ZIP file.';
+    });
+});
+</script>
+
+
+</body>
+</html>
