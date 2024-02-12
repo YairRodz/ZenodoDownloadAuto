@@ -61,7 +61,7 @@ function processZipContents(originalZip) {
         document.getElementById('fileList').appendChild(row);
 
         // Match specific file patterns or folders
-        if(/\/(1r|2rr|3rrr)$/.test(relativePath) || /\/(fid|ser)$/.test(relativePath)) {
+        if(/\/(1r|2rr|3rrr)$/.test(relativePath)) {
             createActionForFileOrFolder(relativePath, actionCell, originalZip, folderActions);
         }
     });
@@ -81,11 +81,7 @@ function createActionForFileOrFolder(relativePath, actionCell, originalZip, fold
             this.textContent = 'Process File'; // Reset button text if needed
         };
         actionCell.appendChild(button);
-    } else if (/\/(fid|ser)$/.test(relativePath)) {
-        let parts = relativePath.split('/');
-        let folderPath = parts.slice(0, -2).join('/');
-        folderActions[folderPath] = true;
-    }
+    } 
 }
 
 function processFolderActions(folderActions, originalZip) {
@@ -144,7 +140,6 @@ async function createZipFromPath(originalZip, triggerPath, isFolder, button) {
 }
 function createActionForFileOrFolder(relativePath, actionCell, originalZip) {
     let button = document.createElement('button');
-    // Determine if it's a special file or folder containing 'ser' or 'fid'
     if (/\/(1r|2rr|3rrr)$/.test(relativePath)) {
         let downloadName = constructDownloadName(relativePath, false);
         button.textContent = `Download ${downloadName}`;
@@ -153,21 +148,7 @@ function createActionForFileOrFolder(relativePath, actionCell, originalZip) {
             await createZipFromPath(originalZip, relativePath, "file", this, downloadName);
             this.textContent = `Save ${downloadName}`;
         };
-    } else if (/\/(ser|fid)$/.test(relativePath)) {
-        let folderPath = relativePath.split('/').slice(0, -1).join('/'); // Get the folder path
-        let downloadName = constructDownloadName(folderPath, true);
-        // Check if the button for this folder has been created
-        if (!actionCell.hasChildNodes()) {
-            button.textContent = `Download ${downloadName}`;
-            button.onclick = async function() {
-                this.textContent = 'Preparing Download...';
-                await createZipFromPath(originalZip, folderPath, "folder", this, downloadName);
-                this.textContent = `Save ${downloadName}`;
-            };
-            actionCell.appendChild(button);
-        }
-        return; // Skip further processing to avoid duplicate buttons
-    } else {
+    }  else {
         // No action needed for this path
         return;
     }
@@ -222,14 +203,7 @@ let foldersWithSpecialFiles = {}; // Object to track folders
 document.getElementById('downloadBtn').addEventListener('click', function() {
     // Existing code to load and process ZIP file
     JSZip.loadAsync(blob).then(originalZip => {
-        originalZip.forEach((relativePath, zipEntry) => {
-            // Check if the path ends with 'ser' or 'fid'
-            if (relativePath.match(/\/([^\/]+)\/(ser|fid)$/)) {
-                // Extract the folder name
-                let folderName = RegExp.$1;
-                foldersWithSpecialFiles[folderName] = true;
-            }
-        });
+       
 
         // After identifying, add buttons for these folders
         for (let folderName in foldersWithSpecialFiles) {
