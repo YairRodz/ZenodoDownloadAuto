@@ -8,7 +8,16 @@
 </head>
 <body>
 
-<button id="downloadBtn">Download ZIP</button>
+<h2>List the content of a remote ZIP file with a CORS Proxy</h2>
+
+<p><strong>One way to bypass this limitation is to use a CORS proxy</strong> that adds the necessary CORS headers to the response. You can either use a public CORS proxy (not recommended for production due to security and reliability concerns) or set up your own. To use a public CORS proxy, prepend the proxy URL to your request:</p>
+
+<p><em>Remember that CORS is a security feature of web browsers, designed to protect users from potentially malicious websites. Any method used to bypass CORS should be carefully considered for its security implications.</em></p>
+
+<button id="downloadBtn">Download ZIP (and wait a few seconds)...</button>
+
+<p><strong>Note: </strong>that you have to allow cors-anywhere.herokuapp to use CORS through https://cors-anywhere.herokuapp.com/corsdemo
+</p>
 <table id="fileList">
     <tr>
         <th>File Name</th>
@@ -17,8 +26,17 @@
 
 <script>
 document.getElementById('downloadBtn').addEventListener('click', function() {
-    fetch('https://zenodo.org/records/1146869/files/sample1.zip')
-    .then(response => response.blob())
+    // Using a CORS proxy to bypass CORS policy
+    let corsProxy = 'https://cors-anywhere.herokuapp.com/';
+    let targetUrl = 'https://zenodo.org/records/1146869/files/sample1.zip';
+
+    fetch(corsProxy + targetUrl)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.blob();
+    })
     .then(blob => {
         JSZip.loadAsync(blob).then(zip => {
             // Clear existing contents
@@ -33,6 +51,9 @@ document.getElementById('downloadBtn').addEventListener('click', function() {
                 document.getElementById('fileList').appendChild(row);
             });
         });
+    })
+    .catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
     });
 });
 </script>
