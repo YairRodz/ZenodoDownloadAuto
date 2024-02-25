@@ -6,3 +6,6 @@ node_modules/
 **/Content/
 **/Decompressed/
 .DS_Store
+demo/table.html
+demo/sample1.zip
+demo/images/

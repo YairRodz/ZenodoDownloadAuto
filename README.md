@@ -137,3 +137,14 @@ Please note that this script has only been tested on Windows operating systems. 
 [Demo downloading a remote zip file and shows and enlarge on click on .png files](html/demoZoomImages.html)
 
 [Demo downloading a remote zip file and allows to dowload zip files with Bruker spectra](html/zipBrukerDataFromRepository.html)
+
+
+## Javascript extraction from local .zip file and generation of list files of interest
+
+[demo javascript extracting .png from .zip files](demo/README.md)
+```zsh
+node src/caller.js /Users/djeanner/git/ZenodoDownloadAuto/resultsSearch/Search_1_12_2_2024_11h12m24s/Results/theZenodo_4616665/Content/Zip_NMR_spectra.zip
+node src/caller.js /Users/djeanner/git/ZenodoDownloadAuto/resultsSearch/Search_1_12_2_2024_11h12m24s/Results/theZenodo_5081868/Content/Zip_cheminfo_nmr_dataset3__NMRium_link.zip
+node src/caller.js /Users/djeanner/git/ZenodoDownloadAuto/resultsSearch/Search_1_12_2_2024_11h12m24s/Results/theZenodo_8171982/Content/Zip_cheminfo_multiplet_analysis__v2_1_2.zip
+node src/caller.js /Users/djeanner/git/ZenodoDownloadAuto/resultsSearch/Search_1_12_2_2024_11h12m24s/Results/theZenodo_10212326/Content/Zip_cheminfo_nmredata__v0_9_9.zip
+```
