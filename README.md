@@ -22,6 +22,9 @@ npm install axios
 npm install csv-writer
 npm install unzipper
 npm install yargs
+npm install jszip
+npm install node-fetch
+
 ```
 
 ## Setup
