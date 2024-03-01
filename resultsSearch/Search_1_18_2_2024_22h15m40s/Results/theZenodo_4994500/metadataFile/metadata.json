@@ -1,0 +1,65 @@
+{
+  "publication_date": "2017-12-22",
+  "title": "Data from: Stallion semen quality depends on MHC matching to teaser mare",
+  "creators": [
+    {
+      "name": "Jeannerat, Elise",
+      "affiliation": "University of Bern"
+    },
+    {
+      "name": "Marti, Eliane",
+      "affiliation": "University of Bern"
+    },
+    {
+      "name": "Berney, Catherine",
+      "affiliation": "University of Lausanne"
+    },
+    {
+      "name": "Janett, Fredi",
+      "affiliation": "University of Zurich"
+    },
+    {
+      "name": "Bollwein, Heinrich",
+      "affiliation": "University of Zurich"
+    },
+    {
+      "name": "Sieme, Harald",
+      "affiliation": "University of Veterinary Medicine Hanover"
+    },
+    {
+      "name": "Burger, Dominik",
+      "affiliation": "University of Bern"
+    },
+    {
+      "name": "Wedekind, Claus",
+      "affiliation": "University of Lausanne"
+    }
+  ],
+  "description": "The major histocompatibility complex (MHC) has repeatedly been found to influence mate choice of vertebrates, with MHC-dissimilar mates typically being preferred over MHC-similar mates. We used horses (Equus caballus) to test whether MHC matching also affects male investment into ejaculates after short exposure to a female. Semen characteristics varied much among stallions. Controlling for this variance with a full-factorial within-subject experimental design, we found that a short exposure to an MHC-dissimilar mare enhanced male plasma testosterone and led to ejaculates with elevated sperm numbers as compared to exposure to an MHC-similar mare. Sperm velocity seemed not affected by the treatment. Overall genetic similarity between stallions and mares (determined from polymorphic microsatellites on 20 different chromosomes) played no significant role here. The MHC type of the teaser mare also affected characteristics of cold-stored sperm after 24 and 48h. As expected from ejaculate economics, sperm viability was elevated after exposure to an MHC-dissimilar mare. However, oxidative stress and the percentage of sperm with a high DNA fragmentation was mostly increased after exposure to an MHC-dissimilar mare, depending also on whether the teaser mare was in estrous or not. We conclude that males can quickly adjust ejaculate quality relative to a female's MHC, and that this male reaction to the social environment can also affect important characteristics of cold-stored semen.",
+  "access_right": "open",
+  "license": {
+    "id": "cc-zero"
+  },
+  "doi": "10.5061/dryad.402c8",
+  "keywords": [
+    "Equus caballus",
+    "Life History Evolution",
+    "Major Histocompatibility Complex (MHC)",
+    "Inbreeding",
+    "Animal Mating/Breeding Systems",
+    "Holocene"
+  ],
+  "notes": "<div class=\"o-metadata__file-usage-entry\">Testosterone_ejaculates<div class=\"o-metadata__file-description\">Pair combination, age of ejaculate at time of measurement (\"incubation\"), experimental week, estrus stage of teaser mare, Wang's coefficient of relatedness r, semen volume, total sperm number, stallion's blood testosterone before and after exposure to teaser mare (and ejaculation), further semen characteristics (as described in paper)</div><div class=\"o-metadata__file-name\"></div></div><div class=\"o-metadata__file-usage-entry\">microsats<div class=\"o-metadata__file-description\">Genotypes of all mares and stallions on 20 microsatellite loci</div><div class=\"o-metadata__file-name\"></div></div>",
+  "related_identifiers": [
+    {
+      "identifier": "10.1111/mec.14490",
+      "relation": "isCitedBy",
+      "scheme": "doi"
+    }
+  ],
+  "communities": [
+    {
+      "id": "dryad"
+    }
+  ]
+}

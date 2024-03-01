@@ -1,0 +1,22 @@
+{
+  "publication_date": "2017-10-06",
+  "title": "A cross-platform format to associate NMR-extracted data (NMReDATA) to chemical structures",
+  "creators": [
+    {
+      "name": "Jeannerat, Damien",
+      "affiliation": "University of Geneva",
+      "orcid": "0000-0001-7018-4288"
+    }
+  ],
+  "description": "<p>Poster presented at the smash conference 2017</p>",
+  "access_right": "open",
+  "license": {
+    "id": "cc-by-4.0"
+  },
+  "doi": "10.5281/zenodo.1003192",
+  "communities": [
+    {
+      "id": "nmredata"
+    }
+  ]
+}

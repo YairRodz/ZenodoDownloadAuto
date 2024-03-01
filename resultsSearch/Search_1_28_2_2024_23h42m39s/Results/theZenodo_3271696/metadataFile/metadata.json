@@ -1,0 +1,65 @@
+{
+  "publication_date": "2019-07-08",
+  "title": "A New Benzopyranyl Cadenane Sesquiterpene and Other Antiplasmodial and Cytotoxic Metabolites from Cleistochlamys Kirkii",
+  "creators": [
+    {
+      "name": "Stephen S. Nyandoro",
+      "affiliation": "Chemistry Department, College of Natural and Applied Sciences, University of Dar es Salaam, P.O. Box. 35061, Dar es Salaam, Tanzania"
+    },
+    {
+      "name": "Maeda, Gasper",
+      "affiliation": "Chemistry Department, College of Natural and Applied Sciences, University of Dar es Salaam, P.O. Box. 35061, Dar es Salaam, Tanzania"
+    },
+    {
+      "name": "Joan J. E. Munissi",
+      "affiliation": "Chemistry Department, College of Natural and Applied Sciences, University of Dar es Salaam, P.O. Box. 35061, Dar es Salaam, Tanzania"
+    },
+    {
+      "name": "Amra Gruhonjic",
+      "affiliation": "Department of Chemistry and Molecular Biology, University of Gothenburg, SE-412 96 Gothenburg, Sweden"
+    },
+    {
+      "name": "Paul A. Fitzpatrick",
+      "affiliation": "Department of Chemistry and Molecular Biology, University of Gothenburg, SE-412 96 Gothenburg, Sweden"
+    },
+    {
+      "name": "Sofia Lindblad",
+      "affiliation": "Department of Chemistry - BMC, Uppsala University, SE-751 23 Uppsala, Sweden"
+    },
+    {
+      "name": "Sandra Duffy",
+      "affiliation": "Griffith Institute of Drug Discovery"
+    },
+    {
+      "name": "Jerry Pelletier",
+      "affiliation": "Department of Biochemistry, McGill University, Montréal"
+    },
+    {
+      "name": "Fangfang Pang",
+      "affiliation": "University of Jyvaskyla, Department of Chemistry"
+    },
+    {
+      "name": "Rakesh Puttreddy",
+      "affiliation": "University of Jyvaskyla, Department of Chemistry"
+    },
+    {
+      "name": "Mate Erdelyi",
+      "affiliation": "Department of Chemistry - BMC, Uppsala University, SE-751 23 Uppsala, Sweden",
+      "orcid": "0000-0003-0359-5970"
+    }
+  ],
+  "description": "<p>Original NMR data for compounds 1-13.</p>",
+  "access_right": "open",
+  "license": {
+    "id": "cc-by-4.0"
+  },
+  "doi": "10.5281/zenodo.3271696",
+  "keywords": [
+    "Cleistochlamys kirkii; Annonaceae; benzopyranyl sesquiterpene; cleistonol; antiplasmodial activity; malaria; cytotoxicity"
+  ],
+  "communities": [
+    {
+      "id": "mdpi"
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "publication_date": "2011-12-31",
+  "title": "Schizanthines N, O, and P, Tropane Alkaloids from the Aerial Parts ofSchizanthus tricolor",
+  "creators": [
+    {
+      "name": "Humam, Munir",
+      "affiliation": null
+    },
+    {
+      "name": "Kehrli, Thomas",
+      "affiliation": null
+    },
+    {
+      "name": "Jeannerat, Damien",
+      "affiliation": null
+    },
+    {
+      "name": "Muñoz, Orlando",
+      "affiliation": null
+    },
+    {
+      "name": "Hostettmann, Kurt",
+      "affiliation": null
+    },
+    {
+      "name": "Christen, Philippe",
+      "affiliation": null
+    }
+  ],
+  "description": "Humam, Munir, Kehrli, Thomas, Jeannerat, Damien, Muñoz, Orlando, Hostettmann, Kurt, Christen, Philippe (2011): Schizanthines N, O, and P, Tropane Alkaloids from the Aerial Parts ofSchizanthus tricolor. Journal of Natural Products 74 (1): 50-53, DOI: 10.1021/np1005423, URL: http://dx.doi.org/10.1021/np1005423",
+  "access_right": "restricted",
+  "doi": "10.1021/np1005423",
+  "keywords": [
+    "Biodiversity",
+    "Taxonomy"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "10.5281/zenodo.4017375",
+      "relation": "hasPart",
+      "resource_type": "image-figure",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "10.5281/zenodo.4017377",
+      "relation": "hasPart",
+      "resource_type": "image-figure",
+      "scheme": "doi"
+    }
+  ],
+  "references": [
+    "(1) Perez, F. Evolution de la integracion floral en el genero Schizanthus (Solanaceae) en asociation a los sistemas de polinizacion. Ph.D. Thesis, Universidad de Chile, Santiago, 2004; p 10.",
+    "(2) Cretton, S.; Glauser, G.; Humam, M.; Jeannerat, D.; Munoz, O.; Maes, L.; Christen, P.; Hostettmann, K. J. Nat. Prod. 2010, 73, 844-847.",
+    "(3) Griffin, W. J.; Lin, G. D. Phytochemistry 2000, 53, 623-637.",
+    "(4) Lounasmaa, M.; Tamminen, T. In The Tropane Alkaloids; Cordell, G. A., Ed.; Academic Press: San Diego, 1993; Vol. 44, Chapter 1, pp1-114.",
+    "(5) Munoz, O.; Schneider, C.; Breitmaier, E. Liebigs Ann. Chem. 1994, 521-522.",
+    "(6) Pena, R. C.; Munoz, O. Biochem. Syst. Ecol. 2002, 30, 45-53.",
+    "(7) Bieri, S.; Munoz, O.; Veuthey, J.-L.; Christen, P. J. Sep. Sci. 2006, 29, 96-102.",
+    "(8) Bieri, S.; Varesio, E.; Munoz, O.; Veuthey, J.-L.; Christen, P. J. Pharm. Biomed. Anal. 2006, 40, 545-551.",
+    "(9) Bieri, S.; Varesio, E.; Veuthey, J.-L.; Munoz, O.; Tseng, L.-H.; Braumann, U.; Spraul, M.; Christen, P. Phytochem. Anal. 2006, 17, 78-86.",
+    "(10) Humam, M.; Munoz, O.; Christen, P.; Hostettmann, K. Nat. Prod. Commun. 2007, 2, 743-747.",
+    "(11) Bourguignon, J.-J.; Schoenfelder, A.; Schmitt, M.; Wermuth, C.-G.; Hechler, V.; Charlier, B.; Maitre, M. J. Med. Chem. 1988, 31, 893- 897.",
+    "(12) Khan, A. T.; Blessing, B.; Schmidt, R. R. Synthesis 1994, 255-257.",
+    "(13) Yagudaev, M. R.; Aripova, S. F. Chem. Nat. Compd. 1986, 22, 74- 78.",
+    "(14) Humam, M.; Christen, P.; Munoz, O.; Hostettmann, K.; Jeannerat, D. Chirality 2008, 20, 20-25.",
+    "(15) Agar, J. T. H.; Evans, W. C. J. Chem. Soc., Perkin Trans. 1 1976, 1550-1553.",
+    "(16) El-Iman, Y. M. S.; Evans, W. C.; Grout, R. J.; Ramsey, K. P. A. Phytochemistry 1987, 26, 2386-2389.",
+    "(17) Al-Said, M. S.; Evans, W. C.; Grout, R. J. J. Chem. Soc., Perkin Trans. 1 1986, 957-959.",
+    "(18) Al-Said, M. S.; Evans, W. C.; Grout, R. J. Phytochemistry 1989, 28, 671-673.",
+    "(19) Bringmann, G.; Gunther, C.; Muhlbacher, J.; Lalith, M. D.; Gunathilake, P.; Wickramasinghe, A. Phytochemistry 2000, 53, 409-416.",
+    "(20) Robins, R. J.; Bachmann, P.; Robinson, T.; Rhodes, M. J. C.; Yamada, Y. FEBS Lett. 1991, 292, 293-297."
+  ],
+  "communities": [
+    {
+      "id": "biosyslit"
+    }
+  ]
+}

@@ -39,28 +39,51 @@ class ExtractChemFiles {
         }
 
         // Create the images directory within the output directory
-        const imagesDir = path.join(this.outputDir, 'images');
-        fs.mkdirSync(imagesDir, { recursive: true });
+        const filesOfInterestDir = path.join(this.outputDir, 'filesOfInterest');
+        fs.mkdirSync(filesOfInterestDir, { recursive: true });
 
         let tableRows = `<tr><th>File Name</th><th>Preview & Download</th></tr>`;
         const filePromises = [];
 
         for (const [relativePath, zipEntry] of Object.entries(this.zip.files)) {
             const uniqueFileName = relativePath.replace(/[/\\:]/g, '_');
-            const imgFilePath = path.join(imagesDir, uniqueFileName);
-
+            const filePath = path.join(filesOfInterestDir, uniqueFileName);
+        
             if (relativePath.endsWith('.png')) {
                 const promise = zipEntry.async("nodebuffer").then((buffer) => {
-                    fs.writeFileSync(imgFilePath, buffer);
-                    const relativeImgPath = path.relative(this.outputDir, imgFilePath);
+                   fs.writeFileSync(filePath, buffer);
+                    const relativePath = path.relative(this.outputDir, filePath);
                     tableRows += `<tr>
                         <td>${relativePath}</td>
-                        <td><a href="${relativeImgPath}" download="${uniqueFileName}"><img src="${relativeImgPath}" style="width:100px; cursor:pointer;"></a></td>
+                        <td><a href="${relativePath}" download="${uniqueFileName}"><img src="${relativePath}" style="width:100px; cursor:pointer;"></a></td>
                     </tr>`;
                 });
-
+        
                 filePromises.push(promise);
-            } 
+            } else if (relativePath.endsWith('.mol') || relativePath.endsWith('.sdf')) {
+                const promise = zipEntry.async("nodebuffer").then((buffer) => {
+                    fs.writeFileSync(filePath, buffer);
+                    const relativePath = path.relative(this.outputDir, filePath);
+                    tableRows += `<tr>
+                        <td>${relativePath}</td>
+                        <td><a href="${relativePath}" download="${uniqueFileName}">${relativePath}</a></td>
+                    </tr>`;
+                });
+        
+                filePromises.push(promise);
+            } else if (relativePath.endsWith('.mnova')) {
+                const promise = zipEntry.async("nodebuffer").then((buffer) => {
+                    fs.writeFileSync(filePath, buffer);
+                    const relativePath = path.relative(this.outputDir, filePath);
+                    const iconPath = path.join('iconImages', 'mnovaIcon.png');
+                    tableRows += `<tr>
+                        <td>${relativePath}</td>
+                        <td><a href="${relativePath}" download="${uniqueFileName}"><img src="${iconPath}" style="width:30px; height:30px;"> ${relativePath}</a></td>
+                    </tr>`;
+                });
+        
+                filePromises.push(promise);
+            }
         }
 
         // Wait for all the files to be processed

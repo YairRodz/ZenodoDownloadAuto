@@ -1,0 +1,66 @@
+{
+  "publication_date": "2011-12-31",
+  "title": "Figure 2. Selected 1H-1H in Schizanthines N, O, and P, Tropane Alkaloids from the Aerial Parts ofSchizanthus tricolor",
+  "creators": [
+    {
+      "name": "Humam, Munir",
+      "affiliation": null
+    },
+    {
+      "name": "Kehrli, Thomas",
+      "affiliation": null
+    },
+    {
+      "name": "Jeannerat, Damien",
+      "affiliation": null
+    },
+    {
+      "name": "Muñoz, Orlando",
+      "affiliation": null
+    },
+    {
+      "name": "Hostettmann, Kurt",
+      "affiliation": null
+    },
+    {
+      "name": "Christen, Philippe",
+      "affiliation": null
+    }
+  ],
+  "description": "Figure 2. Selected 1H-1H COSY (dashed arrows) and 1H-13C HMBC (full arrows) correlations observed for compounds 1, 2, and 3.",
+  "access_right": "open",
+  "license": {
+    "id": "notspecified"
+  },
+  "doi": "10.5281/zenodo.4017377",
+  "keywords": [
+    "Biodiversity",
+    "Taxonomy"
+  ],
+  "notes": "Published as part of <i>Humam, Munir, Kehrli, Thomas, Jeannerat, Damien, Muñoz, Orlando, Hostettmann, Kurt &amp; Christen, Philippe, 2011, Schizanthines N, O, and P, Tropane Alkaloids from the Aerial Parts ofSchizanthus tricolor, pp. 50-53 in Journal of Natural Products 74 (1)</i> on page 51, DOI: 10.1021/np1005423, <a href=\"http://zenodo.org/record/4017373\">http://zenodo.org/record/4017373</a>",
+  "related_identifiers": [
+    {
+      "identifier": "10.1021/np1005423",
+      "relation": "isPartOf",
+      "resource_type": "publication-article",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "urn:lsid:plazi.org:pub:2A3EFFE5FFED3C17D92E2666FF95FFEC",
+      "relation": "isPartOf",
+      "resource_type": "publication-article",
+      "scheme": "lsid"
+    },
+    {
+      "identifier": "https://zenodo.org/record/4017373",
+      "relation": "isPartOf",
+      "resource_type": "publication-article",
+      "scheme": "url"
+    }
+  ],
+  "communities": [
+    {
+      "id": "biosyslit"
+    }
+  ]
+}

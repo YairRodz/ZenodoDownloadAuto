@@ -1,11 +1,11 @@
-const axios = require('axios');
-const fs = require('fs');
-const path = require('path');
-const readline = require('readline');
-const createCsvWriter = require('csv-writer').createObjectCsvWriter;
-const unzipper = require('unzipper');
-const yargs = require('yargs/yargs');
-const { hideBin } = require('yargs/helpers');
+import axios from 'axios';
+import fs from 'fs';
+import path from 'path';
+import readline from 'readline';
+import { createObjectCsvWriter as createCsvWriter } from 'csv-writer';
+import unzipper from 'unzipper';
+import yargs from 'yargs/yargs';
+import { hideBin } from 'yargs/helpers';
 
 // Declare and initialize global variables at the top of the script
 let searchCount = 0;

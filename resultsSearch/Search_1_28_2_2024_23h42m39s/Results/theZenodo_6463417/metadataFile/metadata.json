@@ -1,0 +1,45 @@
+{
+  "publication_date": "2021-12-19",
+  "title": "Halogen Bond Activation in Gold Catalysis",
+  "creators": [
+    {
+      "name": "Helgi Freyr Jónsson",
+      "affiliation": "Norwegian University of Science and Technology",
+      "orcid": "0000-0002-1630-598X"
+    },
+    {
+      "name": "Daniel Sethio",
+      "affiliation": "Uppsala University",
+      "orcid": "0000-0002-8075-1482"
+    },
+    {
+      "name": "Julian Wolf",
+      "affiliation": "Ruhr-Universität Bochum",
+      "orcid": "0000-0001-5430-4331"
+    },
+    {
+      "name": "Stefan Huber",
+      "affiliation": "Ruhr-Universität Bochum",
+      "orcid": "0000-0001-8196-5207"
+    },
+    {
+      "name": "Anne Fiksdahl",
+      "affiliation": "Norwegian University of Science and Technology",
+      "orcid": "0000-0003-2577-2421"
+    },
+    {
+      "name": "Mate Erdelyi",
+      "affiliation": "Uppsala University",
+      "orcid": "0000-0003-0359-5970"
+    }
+  ],
+  "description": "<p>NMR raw data (FIDs)</p>",
+  "access_right": "open",
+  "license": {
+    "id": "cc-by-4.0"
+  },
+  "doi": "10.5281/zenodo.6463417",
+  "keywords": [
+    "NMR, gold, catalysis halogen bond"
+  ]
+}

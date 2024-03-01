@@ -1,0 +1,55 @@
+{
+  "publication_date": "2020-04-21",
+  "title": "Secoiridoids and Iridoids from Morinda asteroscepa",
+  "creators": [
+    {
+      "name": "Linda Zandi",
+      "affiliation": "University of Gothenburg"
+    },
+    {
+      "name": "Marco Makungu",
+      "affiliation": "University of Dar es Salaam"
+    },
+    {
+      "name": "Joan J.E. Munissi",
+      "affiliation": "University of Dar es Salaam"
+    },
+    {
+      "name": "Sandra Duffy",
+      "affiliation": "Eskitis Institute for drug discovery, Griffith University, Australia"
+    },
+    {
+      "name": "Rakesh Puttreddy",
+      "affiliation": "University of Jyvaskyla"
+    },
+    {
+      "name": "Daniel von der Heiden",
+      "affiliation": "Department of Chemistry - BMC, Uppsala University, SE-751 23 Uppsala, Sweden"
+    },
+    {
+      "name": "Kari Rissanen",
+      "affiliation": "University of Jyvaskyla, Finland"
+    },
+    {
+      "name": "Vicky M Avery",
+      "affiliation": "Eskitis Institute for drug discovery, Griffith University, Australia"
+    },
+    {
+      "name": "Stephen S. Nyandoro",
+      "affiliation": "University of Dar es Salaam"
+    },
+    {
+      "name": "Mate Erdelyi",
+      "affiliation": "Department of Chemistry - BMC, Uppsala University, SE-751 23 Uppsala, Sweden"
+    }
+  ],
+  "description": "<p>NMR and X-ray data for the publication Secoiridoids and Iridoids from Morinda asteroscepa</p>",
+  "access_right": "open",
+  "license": {
+    "id": "cc-by-4.0"
+  },
+  "doi": "10.5281/zenodo.3759722",
+  "keywords": [
+    "iridoid, secoiridoid, Morinda, asteroscepa, Rubiaceae, malaria, NMR, natural product"
+  ]
+}

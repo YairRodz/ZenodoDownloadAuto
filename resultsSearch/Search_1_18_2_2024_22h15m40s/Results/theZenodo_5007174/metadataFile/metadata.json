@@ -1,0 +1,56 @@
+{
+  "publication_date": "2019-12-10",
+  "title": "Embryo survival in the oviduct not significantly influenced by major histocompatibility complex social signaling in the horse",
+  "creators": [
+    {
+      "name": "Jeannerat, Elise",
+      "affiliation": "University of Bern"
+    },
+    {
+      "name": "Marti, Eliane",
+      "affiliation": "University of Bern"
+    },
+    {
+      "name": "Thomas, Selina",
+      "affiliation": "University of Bern"
+    },
+    {
+      "name": "Sieme, Harald",
+      "affiliation": "University of Veterinary Medicine"
+    },
+    {
+      "name": "Wedekind, Claus",
+      "affiliation": "University of Lausanne",
+      "orcid": "0000-0001-6143-4716"
+    },
+    {
+      "name": "Burger, Dominik",
+      "affiliation": "University of Bern"
+    },
+    {
+      "name": "Herrera, Carolina",
+      "affiliation": "University of Zurich"
+    }
+  ],
+  "description": "<p>The major histocompatibility complex (MHC) influences sexual selection in various vertebrates. Recently, MHC-linked social signaling was also shown to influence female fertility in horses (<i>Equus caballus</i>) diagnosed 17 days after fertilization. However, it remained unclear at which stage the pregnancy was terminated. Here we test if MHC-linked cryptic female choice in horses happens during the first days of pregnancy, i.e., until shortly after embryonic entrance into the uterus and before fixation in the endometrium. We exposed estrous mares to one of several unrelated stallions, instrumentally inseminated them with semen of another stallion, and flushed the uterus 8 days later to test for the presence of embryos. In total 68 embryos could be collected from 97 experimental trials. This success rate of 70.1% was significantly different from the mean pregnancy rate of 45.7% observed 17 days after fertilization using the same experimental protocol but without embryo flushing. Embryo recovery rate was not significantly dependent on whether the mares had been socially exposed to an MHC-dissimilar or an MHC-similar stallion. These observations suggest that MHC-linked maternal strategies affect embryo survival mainly (or only) during the time of fixation in the uterus.</p>",
+  "access_right": "open",
+  "license": {
+    "id": "cc-zero"
+  },
+  "doi": "10.5061/dryad.s4mw6m936",
+  "keywords": [
+    "horses",
+    "Equus caballus",
+    "Major Histocompatibility Complex (MHC)",
+    "MHC similarity",
+    "social signaling",
+    "Embryo",
+    "Oviduct"
+  ],
+  "notes": "<p>See description in Jeannerat et al.</p>\n<p>Funding provided by: ISMEquine Research<br>Crossref Funder Registry ID: <br>Award Number: </p><p>Funding provided by: Schweizerischer Nationalfonds zur Förderung der Wissenschaftlichen Forschung<br>Crossref Funder Registry ID: http://dx.doi.org/10.13039/501100001711<br>Award Number: 31003A_182265</p>",
+  "communities": [
+    {
+      "id": "dryad"
+    }
+  ]
+}
