@@ -1,3 +1,11 @@
+# ZENODO DATA RETRIEVAL AND GENERATION OF LIST CHEMICAL FILES OF INTEREST
+
+This project consists of two main components, both aimed at facilitating the retrieval and processing of chemical study data from Zenodo, an open-access repository where researchers can share and preserve their research outputs.
+
+The first component is a script named `ZenodoAutomation.js`, this script interacts with the Zenodo API to perform searches based on author and community criteria and it retrieves ZIP files that match these criteria.
+
+The second component is a JavaScript script named `extractChemFiles`. This script processes the ZIP files downloaded by `ZenodoAutomation.js`, extracting files that are of particular interest for chemical studies, specifically focusing on the NMR (Nuclear Magnetic Resonance) field.
+
 # Zenodo Automation
 
 The Zenodo Automation script interfaces with the Zenodo API to automate the process of downloading files associated with two search criteria: author and community. The script is currently being developed in two parallel versions: JavaScript (`ZenodoAutomation.js`) and Python (`ZenodoAutomation.py`), please refer to the appropriate section in this Readme for instructions on how to run each version.
@@ -8,24 +16,34 @@ The Zenodo Automation script interfaces with the Zenodo API to automate the proc
 
 ## Requirements
 
-- Node.js
-- npm
-- axios
-- fs
-- path
+To run these scripts, you will need the following:
 
-You can install the necessary Node.js packages using npm:
+- Node.js: An open-source, cross-platform, JavaScript runtime environment that executes JavaScript code outside a web browser.
+- npm (Node Package Manager): A package manager for the JavaScript programming language. It is the default package manager for the JavaScript runtime environment Node.js.
+
+You will also need the following Node.js packages:
+
+- axios: A promise-based HTTP client for the browser and Node.js.
+- fs (File System): A built-in Node.js package for working with the file system.
+- path: A built-in Node.js package for working with file and directory paths.
+- csv-writer: A package for creating CSV strings or writing them directly to a file.
+- unzipper: A package for extracting zip files.
+- yargs: A package for building interactive command line tools.
+- jszip: A package for creating, reading, and editing .zip files.
+- node-fetch: A package for making HTTP requests.
+
+You can install Node.js and npm from the [official Node.js website](https://nodejs.org/). After you have installed Node.js and npm, you can install the necessary Node.js packages using the following commands in your terminal:
 
 ```bash
-npm install axios fs path
 npm install axios
 npm install csv-writer
 npm install unzipper
 npm install yargs
 npm install jszip
 npm install node-fetch
-
 ```
+
+Please note that you don't need to install `fs` and `path` as they are built-in modules in Node.js.
 
 ## Setup
 
@@ -128,7 +146,113 @@ python3 ZenodoAutomationPython.py --author "Damien Jeannerat"
 
 Please note that this script has only been tested on Windows operating systems. For other operating systems, you may need to modify the script to handle differences in path syntax.
 
-## Related links
+# Javascript extraction from local .zip file and generation of list files of interest
+
+`extractChemFiles.js` is a JavaScript script that interfaces with the local file system to automate the process of extracting files of interest from a .zip file and generating an HTML table listing these files.
+
+## Requirements
+
+To run this script, you will need the following:
+
+- Node.js: An open-source, cross-platform, JavaScript runtime environment that executes JavaScript code outside a web browser.
+- npm (Node Package Manager): A package manager for the JavaScript programming language. It is the default package manager for the JavaScript runtime environment Node.js.
+
+You will also need the following Node.js packages:
+
+- fs (File System): A built-in Node.js package for working with the file system.
+- path: A built-in Node.js package for working with file and directory paths.
+- JSZip: A package for creating, reading, and editing .zip files.
+- node-fetch: A package for making HTTP requests.
+
+You can install Node.js and npm from the [official Node.js website](https://nodejs.org/). After you have installed Node.js and npm, you can install the necessary Node.js packages using the following commands in your terminal:
+
+```bash
+npm install jszip
+npm install node-fetch
+```
+
+Please note that you don't need to install `fs` and `path` as they are built-in modules in Node.js.
+
+## Setup
+
+To get started, download or clone the repository.
+
+To run the script successfully, you need to provide a valid .zip file. This can be either a local file path or a URL. The script will automatically extract the files of interest from the .zip file and generate an HTML table listing these files.
+
+If the output directory does not exist, the script will create it automatically. The HTML table will be saved as `table.html` in the output directory.
+
+## Usage
+
+1. If you run the script without providing a source for the .zip file, you will see the following usage instructions:
+
+```bash
+$ node src/caller.js
+Usage: node caller.js <URL or file path>
+Example (URL): node caller.js https://example.com/path/to/zipfile.zip
+Example (File Path): node caller.js ./path/to/local/zipfile.zip
+```
+
+2. Provide the source of the .zip file. This can be either a local file path or a URL. It is suggested to use the .zip files obtained in the `resultSearch` folder when using the `ZenodoAutomationJavascript.js` script. Therefore, you should use the correct path specified for Linux or Windows.
+
+For Windows, you should use double backslashes (`\\`) in your file paths, like so:
+
+```bash
+node src/caller.js "C:\\path\\to\\your\\zipfile.zip"
+```
+
+For Linux, you can use forward slashes (`/`) in your file paths, like so:
+
+```bash
+node src/caller.js "/path/to/your/zipfile.zip"
+```
+
+Remember to replace `/path/to/your/zipfile.zip` or `C:\\path\\to\\your\\zipfile.zip` with the actual path to your .zip file.
+
+3. The `caller.js` script will call the `ExtractChemFiles` class methods from `extractChemFiles.js`. It takes a .zip file (either from a URL or a local file path) as an argument, creates an instance of `ExtractChemFiles`, and calls the `generateHtml()` method to generate the HTML table.
+
+4. The script will automatically extract files of interest (`.png`, `.mol`, `.sdf`, and `.mnova` files) from the .zip file and generate an HTML table listing these files.
+
+5. The extracted files will be saved in a directory within the current directory. The directory will be named `fromURL_<hash>` if the source is a URL, where `<hash>` is a unique hash generated from the URL. If the source is a local file, the files will be saved in the same directory as the .zip file. Within this directory, the extracted files will be saved in a subdirectory named `filesOfInterest`.
+
+6. The HTML table will be saved as `table.html` in the same directory as the extracted files. This table provides a preview and download link for each extracted file.
+
+## Example
+
+You can use the `wget` command (on Linux) or `curl` command (on Windows) to download a .zip file from a URL, and then use the `caller.js` script to process the .zip file:
+
+For Linux:
+
+```bash
+wget https://zenodo.org/records/1146869/files/sample1.zip
+node src/caller.js sample1.zip
+```
+
+For Windows:
+
+```bash
+curl -O https://zenodo.org/records/1146869/files/sample1.zip
+node src/caller.js sample1.zip
+```
+
+The output will be saved as `table.html` in the same directory as the extracted files.
+
+## Known Issues
+
+Please note that while `caller.js` is supposed to also work with URLs, this feature was not working at the time of writing. For now, this option can be ignored.
+
+# Proposed Future Enhancements
+
+Here are some suggestions for future enhancements to the project:
+
+## Generalize the File Extraction Process
+
+Instead of programming each case (.png, .mol, .mnova, etc.) separately, consider creating a method to generalize this process. One possible implementation could involve using a .json file where we specify the types of files we're interested in, and whether we should have a download option (when clicked), or a preview (like `<img...>`). The advantage of this approach is that adding new features wouldn't require changing the JavaScript code, but only the `fileOfInterestDefinition.json` file.
+
+## Variant of src/caller.js
+
+Consider creating a variant of `src/caller.js` that calls `src/extractChemFiles.js` for each existing zip file in the `resultSearch` folder, instead of needing to point to a specific .zip file. This could further automate the process and save user time.
+
+# Related links
 
 [Demo downloading a remote zip file](html/demoListFilesFromZip.html)
 
@@ -137,14 +261,3 @@ Please note that this script has only been tested on Windows operating systems. 
 [Demo downloading a remote zip file and shows and enlarge on click on .png files](html/demoZoomImages.html)
 
 [Demo downloading a remote zip file and allows to dowload zip files with Bruker spectra](html/zipBrukerDataFromRepository.html)
-
-
-## Javascript extraction from local .zip file and generation of list files of interest
-
-[demo javascript extracting .png from .zip files](demo/README.md)
-```zsh
-node src/caller.js /Users/djeanner/git/ZenodoDownloadAuto/resultsSearch/Search_1_12_2_2024_11h12m24s/Results/theZenodo_4616665/Content/Zip_NMR_spectra.zip
-node src/caller.js /Users/djeanner/git/ZenodoDownloadAuto/resultsSearch/Search_1_12_2_2024_11h12m24s/Results/theZenodo_5081868/Content/Zip_cheminfo_nmr_dataset3__NMRium_link.zip
-node src/caller.js /Users/djeanner/git/ZenodoDownloadAuto/resultsSearch/Search_1_12_2_2024_11h12m24s/Results/theZenodo_8171982/Content/Zip_cheminfo_multiplet_analysis__v2_1_2.zip
-node src/caller.js /Users/djeanner/git/ZenodoDownloadAuto/resultsSearch/Search_1_12_2_2024_11h12m24s/Results/theZenodo_10212326/Content/Zip_cheminfo_nmredata__v0_9_9.zip
-```
